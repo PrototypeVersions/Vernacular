@@ -44,9 +44,14 @@
   .limits { margin: 0; padding-left: 1.1em; }
   .limits li { margin-bottom: 8px; max-width: 60ch; }
 
-  .access { border: 1px solid var(--ink); background: var(--surface); padding: 28px 28px 30px; max-width: 640px; }
-  .access h3 { margin-bottom: 8px; }
-  .access p { color: var(--graphite); font-size: 17px; }
+  .exchange { margin: 0; max-width: 720px; }
+  .ask { font-size: clamp(24px, 2.6vw, 30px); line-height: 1.3; font-style: italic; margin: 0 0 20px; }
+  .answer { border-left: 2px solid var(--lapis); padding: 4px 0 4px 24px; }
+  .answer .file { font-family: var(--mono); font-size: 15px; margin: 0 0 14px; }
+  .chain { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 0; font-size: 18px; }
+  .chain li:not(:last-child)::after { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--graphite); vertical-align: middle; margin: 0 12px; }
+  .private { margin-top: 36px; font-size: 16px; color: var(--graphite); }
+  .private-mark { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -138,11 +143,29 @@
           <li>Whether a preset sounds like the requested artist is judged by ear. The tests prove the file is correct, not that the tone is good.</li>
           <li>Newer firmware may add blocks the record has not seen.</li>
         </ul>
-        <div class="access" style="margin-top: 40px">
-          <h3>Use this skill</h3>
-          <p>The skill is shared privately for now, because its control definitions come from Fender’s desktop app. Owners can ask for access.</p>
-          <a class="button" href="https://github.com/PrototypeVersions/Vernacular/issues/new?title=Access%20request%3A%20Tone%20Master%20Pro%20skill">Ask for access</a>
-        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="example-title">
+    <div class="wrap">
+      <p class="margin-title" id="example-title">See it work</p>
+      <div>
+        <figure class="exchange">
+          <p class="ask">“Gilmour’s Comfortably Numb solo.”</p>
+          <div class="answer">
+            <p class="file">Comfortably_Numb_Solo.preset</p>
+            <ol class="chain" aria-label="Signal chain, in order">
+              <li>Dynamic Compressor</li>
+              <li>Big Horn Fuzz</li>
+              <li>Hiway 105 half stack</li>
+              <li>Digital Delay</li>
+              <li>Large Hall Reverb</li>
+            </ol>
+            <p class="small">Tempo 63 BPM. Built by Claude with the skill, imported into Pro Control and loaded on the owner’s unit.</p>
+          </div>
+        </figure>
+        <p class="private"><span class="private-mark">Private skill.</span> This record shows what the skill can do. The skill itself is not distributed.</p>
       </div>
     </div>
   </section>
