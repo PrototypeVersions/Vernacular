@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fender Tone Master Pro · Vernacular</title>
+<meta name="description" content="What a frontier assistant can and cannot do with Fender Tone Master Pro preset files, with the evidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..600;1,7..72,300..500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .record-head { padding: 56px 0 48px; }
+  .crumb { font-size: 15px; margin-bottom: 28px; }
+  .record-head .head-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: 40px 64px; align-items: end; }
+  .record-head h1 { font-size: clamp(40px, 5.6vw, 64px); }
+  .record-head .lede { margin-top: 20px; max-width: 46ch; }
+  .tally { border-top: 1px solid var(--ink); padding-top: 14px; }
+  .tally-figure { font-size: 88px; line-height: 0.9; font-weight: 300; letter-spacing: -0.04em; font-variant-numeric: lining-nums; }
+  .tally-figure span { font-size: 40px; color: var(--graphite); }
+  .tally p { margin: 10px 0 0; font-size: 16px; color: var(--graphite); }
+  @media (max-width: 760px) { .record-head .head-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 32px; margin: 0; }
+  .facts div { border-top: 1px solid var(--rule); padding: 14px 0 18px; }
+  .facts dt { font-style: italic; font-size: 15px; color: var(--graphite); }
+  .facts dd { margin: 4px 0 0; font-size: 18px; }
+
+  .tasks { width: 100%; border-collapse: collapse; }
+  .tasks-box { overflow-x: auto; }
+  .tasks th { text-align: left; font-weight: 400; font-style: italic; font-size: 15px; color: var(--graphite); padding: 0 24px 12px 0; border-bottom: 1px solid var(--ink); }
+  .tasks td { padding: 16px 24px 16px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 17px; }
+  .tasks td:first-child { min-width: 130px; }
+  .tasks .task { font-size: 18px; }
+  .tasks .evidence { color: var(--graphite); min-width: 260px; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { display: grid; grid-template-columns: minmax(110px, 140px) minmax(0, 1fr); gap: 4px 24px; padding: 16px 0; border-top: 1px solid var(--rule); }
+  .timeline li:first-child { border-top: 0; padding-top: 0; }
+  .timeline .when { font-style: italic; color: var(--graphite); font-size: 16px; }
+  .timeline p { margin: 0; font-size: 17px; }
+  @media (max-width: 560px) { .timeline li { grid-template-columns: minmax(0, 1fr); } }
+
+  .limits { margin: 0; padding-left: 1.1em; }
+  .limits li { margin-bottom: 8px; max-width: 60ch; }
+
+  .access { border: 1px solid var(--ink); background: var(--surface); padding: 28px 28px 30px; max-width: 640px; }
+  .access h3 { margin-bottom: 8px; }
+  .access p { color: var(--graphite); font-size: 17px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="../">Vernacular</a>
+    <nav class="nav" aria-label="Main">
+      <a href="../#records" aria-current="page">Records</a>
+      <a href="../workbench.html">Workbench</a>
+      <a href="../#method">Method</a>
+      <a href="https://github.com/PrototypeVersions/Vernacular">Source</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="record-head">
+    <div class="wrap">
+      <p class="crumb"><a href="../#records">All records</a></p>
+      <div class="head-grid">
+        <div>
+          <h1>Fender Tone Master Pro</h1>
+          <p class="lede">Describe a guitar sound to your assistant and receive a preset file that imports into Pro Control and plays on the unit.</p>
+        </div>
+        <div class="tally" aria-label="5 of 9 tasks pass">
+          <div class="tally-figure" aria-hidden="true">5<span>/9</span></div>
+          <p>tasks pass. One is partly verified and three are not yet supported.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="facts-title">
+    <div class="wrap">
+      <p class="margin-title" id="facts-title">Conditions</p>
+      <dl class="facts">
+        <div><dt>Firmware</dt><dd>1.8.45 and 1.8.58</dd></div>
+        <div><dt>Desktop app</dt><dd>Pro Control 1.8.2</dd></div>
+        <div><dt>Assistant</dt><dd>Claude, with the Vernacular skill</dd></div>
+        <div><dt>Tested by</dt><dd>The owner, on their own unit</dd></div>
+        <div><dt>Last tested</dt><dd>8 November 2026</dd></div>
+        <div><dt>Format</dt><dd>Compact JSON with a repeating 3-byte scramble, no checksum</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tasks-title">
+    <div class="wrap">
+      <p class="margin-title" id="tasks-title">Tasks</p>
+      <div class="tasks-box">
+        <table class="tasks">
+          <thead><tr><th scope="col">Result</th><th scope="col">Task</th><th scope="col">Evidence</th></tr></thead>
+          <tbody>
+            <tr><td><span class="status pass">Pass</span></td><td class="task">Build a preset from a description</td><td class="evidence">Every control is set explicitly; the builder rejects unknown controls and out-of-range values.</td></tr>
+            <tr><td><span class="status pass">Pass</span></td><td class="task">Import into Pro Control</td><td class="evidence">Generated presets appear in My presets after dragging them onto the app.</td></tr>
+            <tr><td><span class="status pass">Pass</span></td><td class="task">Load and play on the unit</td><td class="evidence">Six test presets and two sound presets loaded on the owner’s unit across both firmware versions.</td></tr>
+            <tr><td><span class="status pass">Pass</span></td><td class="task">Knob values match the screen</td><td class="evidence">21 knobs photographed at 12, 25, 50, 63, 75, 88 and 100 per cent, and about 125 at 37 per cent; every reading matched.</td></tr>
+            <tr><td><span class="status pass">Pass</span></td><td class="task">Respect the two impulse-response limit</td><td class="evidence">A two-mic amp plus a convolution reverb loads with no warning, confirming reverbs don’t count.</td></tr>
+            <tr><td><span class="status partial">Partial</span></td><td class="task">Stay within the processing budget</td><td class="evidence">Uses the app’s own cost table. That the budget applies per preset is inferred, not yet observed.</td></tr>
+            <tr><td><span class="status none">Not yet</span></td><td class="task">Scenes</td><td class="evidence">Not mapped. Assign scenes on the unit after import.</td></tr>
+            <tr><td><span class="status none">Not yet</span></td><td class="task">Footswitch and expression assignments</td><td class="evidence">Not mapped. Assign on the unit after import.</td></tr>
+            <tr><td><span class="status none">Not yet</span></td><td class="task">Parallel or two-amp signal paths</td><td class="evidence">Template names are known; how their lanes are stored is not.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="history-title">
+    <div class="wrap">
+      <p class="margin-title" id="history-title">How it was learned</p>
+      <ol class="timeline">
+        <li><span class="when">First pair</span><p>Two exports differing only in Greenbox 8 Drive revealed the scramble and the file’s structure.</p></li>
+        <li><span class="when">Definitions</span><p>Control names, ranges and options were read from the definitions inside the owner’s copy of Pro Control.</p></li>
+        <li><span class="when">Calibration</span><p>Four calibration presets set every knob to 37 per cent; photos of the unit’s screens confirmed the display rule.</p></li>
+        <li><span class="when">Linearity</span><p>Two more presets checked 21 knobs at seven positions, including reversed and unit-bearing controls.</p></li>
+        <li><span class="when">Update</span><p>After the firmware moved to 1.8.58, a preset re-saved on the unit matched the builder’s file exactly.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="limits-title">
+    <div class="wrap">
+      <p class="margin-title" id="limits-title">Limits</p>
+      <div>
+        <ul class="limits">
+          <li>Presets use one straight signal chain.</li>
+          <li>Whether a preset sounds like the requested artist is judged by ear. The tests prove the file is correct, not that the tone is good.</li>
+          <li>Newer firmware may add blocks the record has not seen.</li>
+        </ul>
+        <div class="access" style="margin-top: 40px">
+          <h3>Use this skill</h3>
+          <p>The skill is shared privately for now, because its control definitions come from Fender’s desktop app. Owners can ask for access.</p>
+          <a class="button" href="https://github.com/PrototypeVersions/Vernacular/issues/new?title=Access%20request%3A%20Tone%20Master%20Pro%20skill">Ask for access</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>Vernacular is an early prototype.</p>
+    <p>Fender, Tone Master and Pro Control are trademarks of Fender Musical Instruments Corporation. Vernacular is not affiliated with Fender.</p>
+  </div>
+</footer>
+</body>
+</html>

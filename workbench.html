@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workbench · Vernacular</title>
+<meta name="description" content="Compare two saved files with one setting changed. The workbench decodes them and shows what the change means.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..600;1,7..72,300..500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .bench-head { padding: 56px 0 40px; }
+  .bench-head h1 { font-size: clamp(36px, 4.8vw, 56px); max-width: 18ch; }
+  .bench-head .lede { margin-top: 18px; max-width: 52ch; }
+
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .slot { position: relative; border: 1px dashed var(--graphite); background: var(--surface); padding: 22px 22px 24px; min-height: 150px; display: flex; flex-direction: column; gap: 6px; }
+  .slot.filled { border-style: solid; border-color: var(--ink); }
+  .slot.dragging { border-color: var(--lapis); background: #E6EAF5; }
+  .slot-name { font-style: italic; color: var(--graphite); font-size: 16px; }
+  .slot-file { font-family: var(--mono); font-size: 15px; overflow-wrap: anywhere; }
+  .slot-meta { font-size: 15px; color: var(--graphite); }
+  .slot input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+  .slot:focus-within { outline: 2px solid var(--lapis); outline-offset: 3px; }
+
+  .row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; }
+  .note { font-size: 15px; color: var(--graphite); margin: 0; }
+
+  .finding { padding: 4px 0 0; }
+  .finding h3 { margin-bottom: 8px; }
+  .finding p { color: var(--graphite); font-size: 17px; }
+  .error { color: var(--madder); }
+
+  .preview { font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--graphite); background: var(--surface); border: 1px solid var(--rule); padding: 14px 16px; overflow-x: auto; white-space: pre; margin: 16px 0 0; }
+  .preview b { color: var(--ink); font-weight: 500; }
+
+  .diff { width: 100%; border-collapse: collapse; }
+  .diff-box { overflow-x: auto; }
+  .diff th { text-align: left; font-weight: 400; font-style: italic; font-size: 15px; color: var(--graphite); padding: 0 20px 12px 0; border-bottom: 1px solid var(--ink); }
+  .diff td { padding: 14px 20px 14px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: 16px; }
+  .diff { table-layout: fixed; min-width: 640px; }
+  .diff th:nth-child(1) { width: 32%; }
+  .diff th:nth-child(2), .diff th:nth-child(3) { width: 17%; }
+  .diff .path { font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
+  .diff .val { font-family: var(--mono); font-size: 14px; overflow-wrap: anywhere; }
+  .diff .before { color: var(--madder); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .diff .after { color: var(--moss); }
+  .diff tr.meaningful td { background: #E4E8F3; }
+  .diff tr.meaningful td:first-child { box-shadow: inset 3px 0 0 var(--lapis); padding-left: 14px; }
+  .kind { white-space: nowrap; }
+
+  .reading { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px 48px; }
+  .reading h3 { margin-bottom: 10px; }
+  .reading p { font-size: 17px; }
+  .experiment { border-left: 2px solid var(--lapis); padding-left: 20px; }
+  .experiment label { display: block; font-size: 16px; color: var(--graphite); margin: 18px 0 6px; }
+  .experiment input { font-family: var(--serif); font-size: 17px; padding: 10px 12px; border: 1px solid var(--graphite); background: var(--surface); width: 9ch; border-radius: 2px; }
+  .experiment output { display: block; margin-top: 12px; font-size: 17px; }
+
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="./">Vernacular</a>
+    <nav class="nav" aria-label="Main">
+      <a href="./#records">Records</a>
+      <a href="workbench.html" aria-current="page">Workbench</a>
+      <a href="./#method">Method</a>
+      <a href="https://github.com/PrototypeVersions/Vernacular">Source</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="bench-head">
+    <div class="wrap">
+      <h1>Teach the first word of a tool’s language.</h1>
+      <p class="lede">Save the same file twice, changing one setting in between. Add both here and the workbench decodes them, sets aside the noise, and proposes what the change means.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="files-title">
+    <div class="wrap">
+      <p class="margin-title" id="files-title">Files</p>
+      <div>
+        <div class="pair">
+          <div class="slot" id="slot-a">
+            <span class="slot-name">Before</span>
+            <span class="slot-file" data-role="file">Drop a file or choose one</span>
+            <span class="slot-meta" data-role="meta">The file as it was first saved</span>
+            <input type="file" id="file-a" aria-label="Choose the file saved before the change">
+          </div>
+          <div class="slot" id="slot-b">
+            <span class="slot-name">After</span>
+            <span class="slot-file" data-role="file">Drop a file or choose one</span>
+            <span class="slot-meta" data-role="meta">The same file after changing one setting</span>
+            <input type="file" id="file-b" aria-label="Choose the file saved after the change">
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="button quiet" type="button" id="load-example">Use the Tone Master Pro example</button>
+          <p class="note">Files are read in your browser and never uploaded.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="encoding" hidden aria-labelledby="encoding-title">
+    <div class="wrap">
+      <p class="margin-title" id="encoding-title">Encoding</p>
+      <div class="finding" id="encoding-body"></div>
+    </div>
+  </section>
+
+  <section class="section" id="differences" hidden aria-labelledby="diff-title">
+    <div class="wrap">
+      <p class="margin-title" id="diff-title">Differences</p>
+      <div>
+        <p id="diff-summary"></p>
+        <div class="diff-box">
+          <table class="diff">
+            <thead><tr><th scope="col">Field</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Reading</th></tr></thead>
+            <tbody id="diff-rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="reading" hidden aria-labelledby="reading-title">
+    <div class="wrap">
+      <p class="margin-title" id="reading-title">What it means</p>
+      <div class="reading" id="reading-body"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>The workbench recognises plain JSON, Base64-wrapped JSON and JSON scrambled with a short repeating key. Other formats are a next step.</p>
+    <p>The example files are presets the owner exported from a Fender Tone Master Pro. Vernacular is not affiliated with Fender.</p>
+  </div>
+</footer>
+
+<script src="assets/workbench.js"></script>
+</body>
+</html>

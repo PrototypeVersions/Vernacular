@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vernacular</title>
+<meta name="description" content="Vernacular teaches frontier AI assistants the native file language of the tools you already use, and keeps a tested record of what works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..600;1,7..72,300..500&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .hero { padding: clamp(56px, 9vw, 112px) 0 clamp(48px, 7vw, 88px); }
+  .hero h1 { max-width: 15ch; }
+  .hero .lede { margin-top: 28px; }
+
+  /* The interlinear gloss: one file, read three ways */
+  .gloss { margin: clamp(48px, 7vw, 80px) 0 0; }
+  .gloss-grid {
+    display: grid;
+    grid-template-columns: minmax(84px, 120px) repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+  .gloss-grid > div { padding: 18px 20px 18px 0; border-top: 1px solid var(--rule); }
+  .gloss-grid > .row-first { border-top: 0; }
+  .row-name { font-style: italic; font-size: 16px; color: var(--graphite); }
+  .bytes { font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--graphite); word-spacing: 2px; }
+  .decoded { font-family: var(--mono); font-size: 15px; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
+  .meaning { font-size: clamp(19px, 1.8vw, 23px); line-height: 1.35; }
+  .gloss figcaption { margin-top: 14px; font-size: 15px; color: var(--graphite); max-width: 70ch; }
+
+  .gloss .decoded, .gloss .meaning, .gloss .row-dec, .gloss .row-mean { animation: reveal 700ms ease-out both; }
+  .gloss .decoded, .gloss .row-dec { animation-delay: 500ms; }
+  .gloss .meaning, .gloss .row-mean { animation-delay: 1200ms; }
+  @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 760px) {
+    .gloss-grid { grid-template-columns: minmax(0, 1fr); }
+    .gloss-grid > .row-name { padding-bottom: 0; border-top: 1px solid var(--ink); }
+    .gloss-grid > div:not(.row-name) { border-top: 0; padding-top: 8px; }
+  }
+
+  .argument { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px 48px; }
+  .argument h3 { margin-bottom: 10px; }
+  .argument p { font-size: 17px; color: var(--graphite); }
+
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 0; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; padding: 22px 0; border-top: 1px solid var(--rule); }
+  .steps li:first-child { border-top: 0; padding-top: 0; }
+  .steps li::before { content: counter(step); font-size: 34px; line-height: 1; color: var(--lapis); font-variant-numeric: oldstyle-nums; grid-row: span 2; }
+  .steps h3 { font-size: 21px; }
+  .steps p { margin: 0; font-size: 17px; color: var(--graphite); }
+
+  .records { width: 100%; border-collapse: collapse; font-size: 17px; }
+  .records-box { overflow-x: auto; }
+  .records th { text-align: left; font-weight: 400; font-style: italic; font-size: 15px; color: var(--graphite); padding: 0 24px 12px 0; border-bottom: 1px solid var(--ink); }
+  .records td { padding: 18px 24px 18px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .records .product { font-size: 20px; }
+  .records .muted td { color: var(--graphite); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="./">Vernacular</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#records">Records</a>
+      <a href="workbench.html">Workbench</a>
+      <a href="#method">Method</a>
+      <a href="https://github.com/PrototypeVersions/Vernacular">Source</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Your AI, fluent in the tools you already use.</h1>
+      <p class="lede">Vernacular teaches frontier assistants the native language of a product’s files, then keeps a record of what was tested, on which version, and what still fails.</p>
+      <div class="actions">
+        <a class="button" href="workbench.html">Open the workbench</a>
+        <a class="button quiet" href="records/tone-master-pro.html">Read the first record</a>
+      </div>
+
+      <figure class="gloss" aria-labelledby="gloss-caption">
+        <div class="gloss-grid">
+          <div class="row-name row-first">As saved</div>
+          <div class="bytes row-first">66 0b 0f 00 15 18 31 28 29 17 29 3e 21 2b 21 21 38 6e</div>
+          <div class="bytes row-first">68 2e 3d 3a 2d 37 39 6e 7e 2c 2d 28 39 29</div>
+          <div class="bytes row-first">66 25 3a 21 38 28 36 23 3a 21 68 76 74 64 7c 71 7a …</div>
+
+          <div class="row-name row-dec">Decoded</div>
+          <div class="decoded">"ACD_TubeScreamer"</div>
+          <div class="decoded">"bypass":false</div>
+          <div class="decoded">"overdrive":0.05</div>
+
+          <div class="row-name row-mean">Meaning</div>
+          <div class="meaning">A Greenbox 8 drive pedal</div>
+          <div class="meaning">Switched on</div>
+          <div class="meaning">Drive set to 5 of 100</div>
+        </div>
+        <figcaption id="gloss-caption">Three phrases from a Fender Tone Master Pro preset, read the way a linguist glosses an unfamiliar language: the original, a literal decoding, and what it means to the person playing.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="why">
+    <div class="wrap">
+      <p class="margin-title" id="why">Why this exists</p>
+      <div class="argument">
+        <div>
+          <h3>People keep their tools</h3>
+          <p>Years of presets, projects and settings live inside products people trust. Few will abandon them to start again inside a chat window.</p>
+        </div>
+        <div>
+          <h3>General assistants are the strongest</h3>
+          <p>A frontier model that understands a product usually beats a specialised AI built for it. What it lacks is the product’s language.</p>
+        </div>
+        <div>
+          <h3>Fluency needs proof</h3>
+          <p>A file that looks right can still be wrong. Every claim here is tested against the real product, and every gap is written down.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method" aria-labelledby="method-title">
+    <div class="wrap">
+      <p class="margin-title" id="method-title">How a tool is learned</p>
+      <ol class="steps">
+        <li>
+          <h3>Change one thing</h3>
+          <p>Save the same file twice with a single setting changed. The difference is the first word of the language.</p>
+        </li>
+        <li>
+          <h3>Propose a meaning</h3>
+          <p>The assistant decodes the file, separates the real change from noise such as IDs and names, and says what it thinks the change means.</p>
+        </li>
+        <li>
+          <h3>Test it on the product</h3>
+          <p>It designs the experiment that would prove it wrong. The owner loads the result and reports what the product shows.</p>
+        </li>
+        <li>
+          <h3>Keep the record</h3>
+          <p>What survives becomes a skill any assistant can load, with the evidence attached, ready to re-test when the product updates.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="records" aria-labelledby="records-title">
+    <div class="wrap">
+      <p class="margin-title" id="records-title">Records</p>
+      <div class="records-box">
+        <table class="records">
+          <thead>
+            <tr><th scope="col">Product</th><th scope="col">Version tested</th><th scope="col">Tasks</th><th scope="col">Evidence</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a class="product" href="records/tone-master-pro.html">Fender Tone Master Pro</a><div class="small">Guitar processor presets</div></td>
+              <td>Firmware 1.8.58<div class="small">Pro Control 1.8.2</div></td>
+              <td>5 of 9 pass<div class="small">1 partial, 3 not yet supported</div></td>
+              <td>Tested on the owner’s unit, 8 November 2026</td>
+            </tr>
+            <tr class="muted">
+              <td><span class="product">Your tool</span><div class="small">Anything that saves its settings to a file</div></td>
+              <td>Not yet taught</td>
+              <td>—</td>
+              <td><a href="workbench.html">Start in the workbench</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>Vernacular is an early prototype. Files you open in the workbench stay in your browser.</p>
+    <p>Fender, Tone Master and Pro Control are trademarks of Fender Musical Instruments Corporation. Vernacular is not affiliated with Fender.</p>
+  </div>
+</footer>
+</body>
+</html>
